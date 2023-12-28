@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/login', function () {
+    return redirect(route('filament.admin.auth.login'));
+})->name('login');
+
+Route::get('/{url}', function () {
+    return redirect(route('filament.admin.pages.dashboard'));
+})->where('url', '.*')->middleware('auth');

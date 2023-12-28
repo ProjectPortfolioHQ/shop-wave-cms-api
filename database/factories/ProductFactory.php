@@ -23,8 +23,8 @@ class ProductFactory extends Factory
         return [
             'name' => $name,
             'slug' => $slug,
-            'price' => fake()->numberBetween(100_000, 100_000_000),
-            'thumbnail' => fake()->imageUrl(640, 480, 'animals', true),
+            'price' => fake()->numberBetween(int1: 100_000, int2: 100_000_000),
+            'thumbnail' => fake()->imageUrl(640, 480, 'product', true),
         ];
     }
 }
