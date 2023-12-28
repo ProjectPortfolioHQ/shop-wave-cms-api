@@ -19,4 +19,4 @@ Route::get('/login', function () {
 
 Route::get('/{url}', function () {
     return redirect(route('filament.admin.pages.dashboard'));
-})->where('url', '.*')->middleware('auth');
+})->where('url', '^(?!api).*$')->middleware('auth');
