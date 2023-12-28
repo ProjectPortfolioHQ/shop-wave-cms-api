@@ -15,10 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->string('description');
             $table->string('price');
             $table->string('thumbnail');
-            $table->foreignId('brand_id')->constrained('product_brands');
+            $table->foreignId('brand_id')->nullable(true)->constrained('product_brands');
             $table->timestamps();
         });
     }

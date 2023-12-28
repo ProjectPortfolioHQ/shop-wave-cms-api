@@ -3,15 +3,14 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
-use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 
 class ProductResource extends Resource
 {
@@ -23,7 +22,18 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')
+                    ->live()
+                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state)))
+                    ->required(),
+                Forms\Components\TextInput::make('slug')
+                    ->required(),
+                Forms\Components\TextInput::make('price')
+                    ->required(),
+                Forms\Components\TextInput::make('description')
+                    ->required(),
+                Forms\Components\FileUpload::make('thumbnail')
+                    ->required(),
             ]);
     }
 
@@ -31,7 +41,13 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('price')
+                    ->sortable(),
+                Tables\Columns\ImageColumn::make('thumbnail')
+                    ->searchable(),
             ])
             ->filters([
                 //
