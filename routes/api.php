@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductBrandController;
+use App\Http\Controllers\ProductIndexController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::name('product.')->group(function () {
     Route::prefix('/products')->group(function () {
-        Route::get('/brands', [ProductBrandController::class, 'index'])->name('brands');
+        Route::get('/brands', [ProductBrandController::class, 'index'])->name('products.brands.index');
+        Route::get('/', ProductIndexController::class)->name('products.index');
     });
 });

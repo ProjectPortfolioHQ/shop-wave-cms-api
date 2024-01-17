@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 
@@ -17,6 +18,8 @@ class ProductResource extends Resource
     protected static ?string $model = Product::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $navigationGroup = 'Product';
 
     public static function form(Form $form): Form
     {
@@ -44,13 +47,18 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('brand.name')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('price')
                     ->sortable(),
                 Tables\Columns\ImageColumn::make('thumbnail')
                     ->searchable(),
             ])
             ->filters([
-                //
+                SelectFilter::make('brand')
+                    ->multiple(true)
+                    ->relationship('brand', 'name')
+                    ->preload(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

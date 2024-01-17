@@ -13,6 +13,11 @@ class Product extends Model
         'name',
         'slug',
         'thumbnail',
-        'brand_id'
+        'brand_id',
     ];
+
+    public function brand()
+    {
+        return $this->belongsTo(ProductBrand::class);
+    }
 }
