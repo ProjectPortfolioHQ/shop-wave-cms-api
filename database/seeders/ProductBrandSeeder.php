@@ -18,7 +18,7 @@ class ProductBrandSeeder extends Seeder
         'masstel',
         'mobell',
         'itel',
-        'apple'
+        'apple',
     ];
 
     /**
@@ -29,7 +29,7 @@ class ProductBrandSeeder extends Seeder
         foreach (self::BRANDS as $brand) {
             ProductBrand::create([
                 'name' => $brand,
-                'slug' => Str::slug($brand)
+                'slug' => Str::slug($brand),
             ]);
         }
     }

@@ -25,6 +25,8 @@ class ProductFactory extends Factory
             'slug' => $slug,
             'price' => fake()->numberBetween(int1: 100_000, int2: 100_000_000),
             'thumbnail' => fake()->imageUrl(640, 480, 'product', true),
+            'created_at' => now()->format('Y-m-d H:i:s'),
+            'updated_at' => now()->format('Y-m-d H:i:s'),
         ];
     }
 }

@@ -16,6 +16,8 @@ class Product extends Model
         'brand_id',
     ];
 
+    // public $timestamps = false; Uncomment this when run seeder to have created_at and updated_at
+
     public function brand()
     {
         return $this->belongsTo(ProductBrand::class);
